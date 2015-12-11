@@ -1,0 +1,19 @@
+{
+  "name": "youtube-sync-application",
+  "version": "1.0.0",
+  "description": "Enter Channel Streams and watch videos simultaneously with others",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND.git"
+  },
+  "author": "Michael B. Hsiao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND/issues"
+  },
+  "homepage": "https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND#readme"
+}
