@@ -15,5 +15,28 @@
   "bugs": {
     "url": "https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND/issues"
   },
-  "homepage": "https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND#readme"
+  "homepage": "https://github.com/hsiaomb/WDI_PROJECT_4_BACKEND#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.0",
+    "cors": "^2.7.1",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-ejs-layouts": "^2.0.0",
+    "express-jwt": "^3.3.0",
+    "express-session": "^1.12.1",
+    "foreman": "^1.4.1",
+    "http": "0.0.0",
+    "jsonwebtoken": "^5.4.1",
+    "method-override": "^2.3.5",
+    "mongoose": "^4.3.0",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "start": "^1.1.1",
+    "web": "0.0.2"
+  }
 }
