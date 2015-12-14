@@ -39,7 +39,9 @@ app.use('/api', expressJWT({ secret: secret })
   .unless({
     path: [
       { url: '/api/login', methods: ['POST'] },
-      { url: '/api/register', methods: ['POST'] }
+      { url: '/api/register', methods: ['POST'] },
+      { url: '/api/channels', methods: ['POST', 'GET'] },
+      { url: '/api/channels/:id', methods: ['GET', 'PUT', 'PATCH', 'DELETE'] },
     ]
   }));
 
