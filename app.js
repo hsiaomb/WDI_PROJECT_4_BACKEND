@@ -65,7 +65,9 @@ io.on('connection', function(socket){
     io.emit('vidId', vid);
   });
   socket.on('playerState', function(state){
-    console.log(state);
     io.emit('playerState', state);
+  });
+  socket.on('currentTime', function(time){
+    io.emit('currentTime', time);
   });
 });
