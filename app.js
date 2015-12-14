@@ -34,24 +34,23 @@ app.use(cookieParser());
 app.use(morgan('dev'));
 app.use(cors());
 app.use(passport.initialize());
-
-app.use('/api', expressJWT({ secret: secret })
-  .unless({
-    path: [
-      { url: '/api/login', methods: ['POST'] },
-      { url: '/api/register', methods: ['POST'] },
-      { url: '/api/channels', methods: ['POST', 'GET'] },
-      { url: '/api/channels/:id', methods: ['GET', 'PUT', 'PATCH', 'DELETE'] },
-    ]
-  }));
-
-app.use(function (err, req, res, next) {
-  if (err.name === 'UnauthorizedError') {
-    return res.status(401).json({message: 'Unauthorized request.'});
-  }
-  next();
-});
-
+//
+// app.use('/api', expressJWT({ secret: secret })
+//   .unless({
+//     path: [
+//       { url: '/api/login', methods: ['POST'] },
+//       { url: '/api/register', methods: ['POST'] },
+//       { url: '/api/channels', methods: ['POST', 'GET'] },
+//       { url: '/api/channels/:id', methods: ['GET', 'PUT', 'PATCH', 'DELETE'] },
+//     ]
+//   }));
+//
+// app.use(function (err, req, res, next) {
+//   if (err.name === 'UnauthorizedError') {
+//     return res.status(401).json({message: 'Unauthorized request.'});
+//   }
+//   next();
+// });
 
 var routes = require('./config/routes');
 app.use("/api", routes);
@@ -60,16 +59,22 @@ var server = app.listen(3000);
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  socket.on('message', function(msg){
-    io.emit('message', msg);
+  socket.on('message', function(id, msg){
+    io.to(id).emit('message', msg);
   });
-  socket.on('vidId', function(vid){
-    io.emit('vidId', vid);
+  socket.on('vidId', function(id, vid){
+    io.to(id).emit('vidId', vid);
   });
-  socket.on('playerState', function(state){
-    io.emit('playerState', state);
+  socket.on('playerState', function(id, state){
+    io.to(id).emit('playerState', state);
   });
-  socket.on('currentTime', function(time){
-    io.emit('currentTime', time);
+  socket.on('currentTime', function(id, time){
+    io.to(id).emit('currentTime', time);
   });
+  socket.on('joinedRoom', function(id) {
+    socket.join(id);
+    });
+  socket.on('leaveRoom', function(id) {
+    socket.leave(id);
+    });
 });
