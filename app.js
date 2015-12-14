@@ -61,7 +61,11 @@ io.on('connection', function(socket){
   socket.on('message', function(msg){
     io.emit('message', msg);
   });
-  socket.on('video', function(vid){
-    io.emit('video', vid);
+  socket.on('vidId', function(vid){
+    io.emit('vidId', vid);
+  });
+  socket.on('playerState', function(state){
+    console.log(state);
+    io.emit('playerState', state);
   });
 });
