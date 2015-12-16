@@ -69,12 +69,28 @@ io.on('connection', function(socket){
     io.to(id).emit('playerState', state);
   });
   socket.on('currentTime', function(id, time){
+    console.log(time);
     io.to(id).emit('currentTime', time);
   });
-  socket.on('joinedRoom', function(id) {
+  socket.on('nextVideo', function(id, video){
+    io.to(id).emit('nextVideo', video);
+  });
+  socket.on('playlistUpdate', function(id){
+    io.to(id).emit('playlistUpdate');
+  });
+  // socket.on('newUser', function(id){
+  //   io.to(socket.id).emit('newUser');
+  // });
+  socket.on('addToPlaylist', function(id){
+    io.to(id).emit('addToPlaylist');
+  });
+  socket.on('joinedRoom', function(id, time) {
     socket.join(id);
+    // io.to(socket.id).emit('newUserCurrentTime', time);
+    console.log('joined ' + id);
     });
   socket.on('leaveRoom', function(id) {
     socket.leave(id);
+    console.log('left ' + id);
     });
 });
