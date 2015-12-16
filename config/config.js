@@ -1,4 +1,4 @@
 module.exports = {
   'secret': 'watchtogether',
-  'database': 'mongodb://localhost:27017/youtube-sync-application'
+  'database': process.env.MONGOLAB_URI ||'mongodb://localhost/youtube-sync-application'
 };
