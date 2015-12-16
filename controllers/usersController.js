@@ -42,4 +42,4 @@ module.exports = {
   usersShow:   usersShow,
   usersUpdate: usersUpdate,
   usersDelete: usersDelete
-}
+};
