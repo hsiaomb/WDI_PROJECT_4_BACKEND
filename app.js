@@ -55,12 +55,12 @@ app.use(passport.initialize());
 var routes = require('./config/routes');
 app.use("/api", routes);
 
-var server = app.listen(process.env.PORT || 3000 );
+var server = app.listen(3000);
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  socket.on('message', function(id, msg){
-    io.to(id).emit('message', msg);
+  socket.on('message', function(id, user, msg){
+    io.to(id).emit('message', user, msg);
   });
   socket.on('vidId', function(id, vid){
     io.to(id).emit('vidId', vid);
@@ -75,18 +75,26 @@ io.on('connection', function(socket){
   socket.on('nextVideo', function(id, video){
     io.to(id).emit('nextVideo', video);
   });
-  socket.on('playlistUpdate', function(id){
-    io.to(id).emit('playlistUpdate');
-  });
   // socket.on('newUser', function(id){
   //   io.to(socket.id).emit('newUser');
   // });
-  socket.on('addToPlaylist', function(id){
-    io.to(id).emit('addToPlaylist');
+  socket.on('updatePlaylist', function(id, playlist){
+    console.log('received');
+    io.to(id).emit('playlistUpdated', playlist);
   });
-  socket.on('joinedRoom', function(id, time) {
+  socket.on('nextPlaylist', function(id){
+    console.log('receiver')
+    io.to(id).emit('nextPlaylist');
+  });
+  socket.on('destroyVideo', function(id){
+    console.log('DESTROYED')
+    io.to(id).emit('destroyVideo');
+  });
+  socket.on('stopVideo', function(id){
+    io.to(id).emit('stopVideo');
+  });
+  socket.on('joinedRoom', function(id) {
     socket.join(id);
-    // io.to(socket.id).emit('newUserCurrentTime', time);
     console.log('joined ' + id);
     });
   socket.on('leaveRoom', function(id) {
