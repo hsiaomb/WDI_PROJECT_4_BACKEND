@@ -35,6 +35,7 @@ function channelsUpdate(req, res){
     if (req.body.current_video) channel.current_video = req.body.current_video;
     if (req.body.playlist) channel.playlist = req.body.playlist;
     if (req.body.locked) channel.locked = req.body.locked;
+    if (req.body.users) channel.users = req.body.users;
 
     channel.save(function(err) {
      if (err) return res.status(500).json({message: "Something went wrong!"});

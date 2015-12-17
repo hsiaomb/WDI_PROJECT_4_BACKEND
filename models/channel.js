@@ -1,10 +1,9 @@
 var mongoose = require("mongoose");
-var User = require('./user');
 
 var channelSchema = new mongoose.Schema({
     name         : { type: String },
     description  : { type: String },
-    created_by   : { type: String, ref: 'User'},
+    created_by   : { type: String},
     users        : { type: Array },
     secret       : { type: String },
     current_video: { type: String },

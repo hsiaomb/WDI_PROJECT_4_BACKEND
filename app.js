@@ -59,8 +59,8 @@ var server = app.listen(3000);
 var io = require('socket.io')(server);
 
 io.on('connection', function(socket){
-  socket.on('message', function(id, user, msg){
-    io.to(id).emit('message', user, msg);
+  socket.on('message', function(id, user, img, msg){
+    io.to(id).emit('message', user, img, msg);
   });
   socket.on('vidId', function(id, vid){
     io.to(id).emit('vidId', vid);
@@ -94,11 +94,11 @@ io.on('connection', function(socket){
     io.to(id).emit('stopVideo');
   });
   socket.on('joinedRoom', function(id) {
-    socket.join(id);
+    socket.join(id).emit('joinedRoom');
     console.log('joined ' + id);
     });
   socket.on('leaveRoom', function(id) {
-    socket.leave(id);
+    socket.leave(id).emit('leaveRoom');
     console.log('left ' + id);
     });
 });
